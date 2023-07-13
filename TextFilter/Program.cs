@@ -11,7 +11,7 @@ var reader = container.GetInstance<ITextReader>();
 
 string fileContents = reader.ReadText(absoluteFilePath);
 
-var filterProcessor = container.GetInstance<ITextFilterProcessor>();
+var filterProcessor = container.GetInstance<TextFilterProcessor>();
 
 string filteredText = filterProcessor.ApplyFilters(fileContents);
 
@@ -24,7 +24,7 @@ static Container ConfigureContainer()
     var container = new Container();
 
     container.Register<ITextReader, TextFilter.TextReader>();
-    container.Register<ITextFilterProcessor, TextFilterProcessor>();
+    container.Register<TextFilterProcessor>();
     container.Collection.Register<ITextFilter>(typeof(LengthFilter), typeof(LetterTFilter), typeof(VowelInMiddleFilter));
 
     container.Verify();
